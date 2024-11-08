@@ -1,0 +1,17 @@
+.tile {
+  width: 100%;
+  background-color: var(--light);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.tile.unmarked:hover {
+  background-color: var(--light-hover);
+}
+.tile.marked {
+  background-color: rgb(236, 236, 236);
+}
