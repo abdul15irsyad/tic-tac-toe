@@ -1,17 +1,31 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import { config } from 'dotenv';
 import './globals.css';
+config();
 
 const poppins = Poppins({
+  style: 'normal',
   weight: ['100', '400', '700', '900'],
   subsets: ['latin'],
+  fallback: ['sans-serif'],
 });
 
-export const metadata: Metadata = {
+export const commonMetaData = {
   title: 'Tic Tac Toe',
   description: 'Game to be first one line',
+  images: [`${process.env.NEXT_PUBLIC_BASE_URL}/tic-tac-toe-meta-image.jpg`],
+};
+
+export const metadata: Metadata = {
+  title: commonMetaData.title,
+  description: commonMetaData.description,
+  keywords: ['tic tac toe', 'game', 'board'],
+  twitter: { ...commonMetaData, card: 'summary_large_image' },
   openGraph: {
-    images: ['/tic-tac-toe-meta-image.jpg'],
+    url: process.env.NEXT_PUBLIC_BASE_URL,
+    type: 'website',
+    ...commonMetaData,
   },
 };
 
