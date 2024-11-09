@@ -11,7 +11,7 @@ const poppins = Poppins({
   fallback: ['sans-serif'],
 });
 
-export const commonMetaData = {
+const commonMetaData = {
   title: 'Tic Tac Toe',
   description: 'Game to be first one line',
   images: [`${process.env.NEXT_PUBLIC_BASE_URL}/tic-tac-toe-meta-image.jpg`],
