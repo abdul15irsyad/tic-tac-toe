@@ -59,9 +59,9 @@ export const Tile = ({ tile }: { tile: ITile }) => {
       }
     >
       {tile.mark === 'x' ? (
-        <TimesMark />
+        <TimesMark style={{ fontSize: '3.5rem' }} />
       ) : tile.mark === 'o' ? (
-        <CircleMark />
+        <CircleMark style={{ fontSize: '3.5rem' }} />
       ) : null}
     </div>
   );
