@@ -1,6 +1,27 @@
 :root {
-  --green: #a0e4a5;
-  --red: #ff5c7d;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --green: #34d399;
+  --red: #f87171;
   --light: #dfecff;
   --light-hover: #d9e4f3;
+  --background: #fdfdfd;
+  --grey300: #d1d5db;
+  --grey400: #9ca3af;
+  --green100: #dcfce7;
+  --green300: #86efac;
+  --green700: #15803d;
+}
+
+:active {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+* {
+  transition: 0.3s;
+}
+
+body {
+  background-color: var(--background);
 }

@@ -6,12 +6,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.3s;
+  width: 25vw;
 }
 
 .tile.unmarked:hover {
   background-color: var(--light-hover);
 }
+
 .tile.marked {
+  cursor: default;
   background-color: rgb(236, 236, 236);
+}
+
+.tile.winning-tile {
+  opacity: 1;
+}
+.tile.not-winning-tile {
+  opacity: 0.25;
+  cursor: default;
+}
+
+@media screen and (min-width: 768px) {
+  .tile {
+    width: 5.5rem;
+  }
 }

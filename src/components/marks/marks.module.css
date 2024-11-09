@@ -1,0 +1,11 @@
+.mark {
+  font-size: 3.5rem;
+}
+
+.mark.times {
+  color: var(--red);
+}
+
+.mark.circle {
+  color: var(--green);
+}
