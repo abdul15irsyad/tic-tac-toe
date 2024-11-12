@@ -13,6 +13,11 @@
   background-color: var(--light-hover);
 }
 
+.tile .hover-mark {
+  display: none;
+  opacity: 0.5;
+}
+
 .tile.marked {
   cursor: default;
   background-color: rgb(236, 236, 236);
@@ -29,5 +34,9 @@
 @media screen and (min-width: 768px) {
   .tile {
     width: 5.5rem;
+  }
+
+  .tile.unmarked:hover .hover-mark {
+    display: flex;
   }
 }
