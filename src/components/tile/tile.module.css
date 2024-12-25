@@ -9,7 +9,7 @@
   width: 25vw;
 }
 
-.tile.unmarked:hover {
+.tile:not(.not-winning-tile).unmarked:hover {
   background-color: var(--light-hover);
 }
 

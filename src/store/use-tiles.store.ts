@@ -30,7 +30,7 @@ export const useTileStore = create<ITiles>(
     persist as (
       config: StateCreator<ITiles>,
       options: PersistOptions<
-        Pick<ITiles, 'tiles' | 'turn' | 'firstTurn' | 'winner'>
+        Pick<ITiles, 'tiles' | 'turn' | 'firstTurn' | 'winner' | 'winningTiles'>
       >,
     ) => StateCreator<ITiles>
   )(
@@ -47,6 +47,8 @@ export const useTileStore = create<ITiles>(
         firstTurn,
         turn: firstTurn,
         size: 3,
+        winner: undefined,
+        winningTiles: undefined,
         changeTurn: () =>
           set((state) => ({ turn: state.turn === 'x' ? 'o' : 'x' })),
         setTiles: (tiles) => set({ tiles }),
@@ -74,6 +76,7 @@ export const useTileStore = create<ITiles>(
         turn: state.turn,
         firstTurn: state.firstTurn,
         winner: state.winner,
+        winningTiles: state.winningTiles,
       }),
     },
   ),

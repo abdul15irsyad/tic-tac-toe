@@ -61,13 +61,15 @@ export const Tile = ({ tile }: { tile: ITile }) => {
       ) : tile.mark === 'o' ? (
         <CircleMark style={{ fontSize: '3.5rem' }} />
       ) : (
-        <div className={styles['hover-mark']}>
-          {turn === 'x' ? (
-            <TimesMark style={{ fontSize: '3.5rem' }} />
-          ) : (
-            <CircleMark style={{ fontSize: '3.5rem' }} />
-          )}
-        </div>
+        !winner && (
+          <div className={styles['hover-mark']}>
+            {turn === 'x' ? (
+              <TimesMark style={{ fontSize: '3.5rem' }} />
+            ) : (
+              <CircleMark style={{ fontSize: '3.5rem' }} />
+            )}
+          </div>
+        )
       )}
     </div>
   );

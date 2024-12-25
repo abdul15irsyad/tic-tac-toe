@@ -5,7 +5,7 @@
   gap: 0.25rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   font-family: unset;
   font-size: 16px;
   background-color: var(--primary);
