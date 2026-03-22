@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
+import { Figtree } from 'next/font/google';
 import { config } from 'dotenv';
 import './globals.css';
+import '@mantine/core/styles.css';
+import { createTheme, MantineProvider } from '@mantine/core';
 config();
 
-const poppins = Poppins({
+const figtree = Figtree({
   style: 'normal',
-  weight: ['100', '400', '700', '900'],
+  weight: ['400', '700', '800', '900'],
   subsets: ['latin'],
   fallback: ['sans-serif'],
 });
@@ -29,14 +31,18 @@ export const metadata: Metadata = {
   },
 };
 
+const theme = createTheme({});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>{children}</body>
+    <html lang='en'>
+      <body className={figtree.className}>
+        <MantineProvider theme={theme}>{children}</MantineProvider>
+      </body>
     </html>
   );
 }

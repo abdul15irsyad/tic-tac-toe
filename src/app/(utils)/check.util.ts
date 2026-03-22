@@ -1,4 +1,4 @@
-import { IMark, ITile } from '@/store/use-tiles.store';
+import { IMark, ITile } from '@/app/(store)/use-tiles.store';
 
 export const checkWinCondition = (
   tiles: ITile[],

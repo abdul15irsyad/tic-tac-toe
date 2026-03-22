@@ -1,14 +1,13 @@
 'use client';
 
-import { Button } from '@/components/button/button.component';
-import { Tiles } from '@/components/tiles/tiles.component';
-import { useTileStore } from '@/store/use-tiles.store';
-import { Refresh } from '@mui/icons-material';
-import styles from './page.module.css';
-import { Notification } from '@/components/notification/notification.component';
+import { Notification } from '@/app/(components)/notification/notification.component';
 import { useEffect } from 'react';
-import { TimesMark } from '@/components/marks/times.component';
-import { CircleMark } from '@/components/marks/circle.component';
+import { CircleMark } from '@/app/(components)/marks/circle.component';
+import { XMark } from '@/app/(components)/marks/times.component';
+import { Tiles } from '@/app/(components)/tiles/tiles.component';
+import { useTileStore } from './(store)/use-tiles.store';
+import { IconRefresh } from '@tabler/icons-react';
+import { Box, Button, Container, Title } from '@mantine/core';
 
 export default () => {
   const { tiles, winner, notification, turn, clearTiles, setNotification } =
@@ -18,11 +17,7 @@ export default () => {
     if (winner) {
       setNotification(
         <>
-          {winner === 'x' ? (
-            <TimesMark style={{ fontSize: '18px' }} />
-          ) : (
-            <CircleMark style={{ fontSize: '18px' }} />
-          )}
+          {winner === 'x' ? <XMark size='1rem' /> : <CircleMark size='1rem' />}
           <span>win the game 🎉</span>
         </>,
       );
@@ -31,30 +26,37 @@ export default () => {
     } else {
       setNotification(
         <>
-          {turn === 'x' ? (
-            <TimesMark style={{ fontSize: '18px' }} />
-          ) : (
-            <CircleMark style={{ fontSize: '18px' }} />
-          )}
+          {turn === 'x' ? <XMark size='1rem' /> : <CircleMark size='1rem' />}
           <span>turn to play</span>
         </>,
       );
     }
   }, [tiles, turn, winner, setNotification]);
   return (
-    <div className={styles.container}>
-      <h1>Tic Tac Toe</h1>
-      <div style={{ padding: '0.5rem', textAlign: 'center' }}>
+    <Container
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '0 auto',
+        padding: '2rem 1rem 0',
+      }}
+    >
+      <Title fw={900}>Tic Tac Toe</Title>
+      <Box ta='center' p='md'>
         <Tiles />
         {notification && <Notification>{notification}</Notification>}
-      </div>
+      </Box>
       <Button
-        text="Restart"
-        startIcon={<Refresh />}
+        leftSection={<IconRefresh size='1rem' />}
         onClick={() => clearTiles()}
         disabled={tiles?.filter(({ mark }) => mark)?.length === 0}
-        style={{ fontWeight: 'bold' }}
-      />
-    </div>
+        radius='md'
+      >
+        Restart
+      </Button>
+    </Container>
   );
 };

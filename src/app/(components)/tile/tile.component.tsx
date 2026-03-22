@@ -1,10 +1,10 @@
 'use client';
 
-import { ITile, useTileStore } from '@/store/use-tiles.store';
+import { ITile, useTileStore } from '@/app/(store)/use-tiles.store';
 import styles from './tile.module.css';
 import { CircleMark } from '../marks/circle.component';
-import { TimesMark } from '../marks/times.component';
-import { checkWinCondition } from '@/utils/check.util';
+import { XMark } from '../marks/times.component';
+import { checkWinCondition } from '@/app/(utils)/check.util';
 import { useCallback, useMemo } from 'react';
 
 export const Tile = ({ tile }: { tile: ITile }) => {
@@ -57,17 +57,13 @@ export const Tile = ({ tile }: { tile: ITile }) => {
       onClick={winner ? undefined : handleClick}
     >
       {tile.mark === 'x' ? (
-        <TimesMark style={{ fontSize: '3.5rem' }} />
+        <XMark size='3rem' />
       ) : tile.mark === 'o' ? (
-        <CircleMark style={{ fontSize: '3.5rem' }} />
+        <CircleMark size='3rem' />
       ) : (
         !winner && (
           <div className={styles['hover-mark']}>
-            {turn === 'x' ? (
-              <TimesMark style={{ fontSize: '3.5rem' }} />
-            ) : (
-              <CircleMark style={{ fontSize: '3.5rem' }} />
-            )}
+            {turn === 'x' ? <XMark size='3rem' /> : <CircleMark size='3rem' />}
           </div>
         )
       )}
