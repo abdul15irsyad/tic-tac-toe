@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
-import { Figtree } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { config } from 'dotenv';
 import './globals.css';
 import '@mantine/core/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
 config();
 
-const figtree = Figtree({
+const mainFont = Plus_Jakarta_Sans({
   style: 'normal',
-  weight: ['400', '700', '800', '900'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   subsets: ['latin'],
   fallback: ['sans-serif'],
 });
@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={figtree.className}>
+      <body className={mainFont.className}>
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>

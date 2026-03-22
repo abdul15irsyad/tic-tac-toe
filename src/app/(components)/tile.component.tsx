@@ -1,13 +1,17 @@
 'use client';
 
 import { ITile, useTileStore } from '@/app/(store)/use-tiles.store';
-import styles from './tile.module.css';
-import { CircleMark } from '../marks/circle.component';
-import { XMark } from '../marks/times.component';
 import { checkWinCondition } from '@/app/(utils)/check.util';
 import { useCallback, useMemo } from 'react';
+import { Box } from '@mantine/core';
+import { useHover, useMediaQuery } from '@mantine/hooks';
+import { IconCircle, IconX } from '@tabler/icons-react';
+import { TileMark } from './tile-mark';
 
 export const Tile = ({ tile }: { tile: ITile }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+  const { hovered, ref: refHover } = useHover();
+
   const {
     tiles,
     turn,
@@ -19,7 +23,7 @@ export const Tile = ({ tile }: { tile: ITile }) => {
     setWinningTiles,
   } = useTileStore();
 
-  const isWinningTiles = useMemo(
+  const isWinningTile = useMemo(
     () =>
       winner && (winningTiles?.length ?? 0) > 0
         ? !!winningTiles?.find(
@@ -52,21 +56,36 @@ export const Tile = ({ tile }: { tile: ITile }) => {
   }, [changeTurn, setTiles, setWinner, setWinningTiles, tile, tiles, turn]);
 
   return (
-    <div
-      className={`${styles.tile} ${tile.mark ? styles.marked : styles.unmarked} ${isWinningTiles !== undefined ? (isWinningTiles ? styles['winning-tile'] : styles['not-winning-tile']) : ''}`}
+    <Box
+      ref={refHover}
+      display='flex'
+      bdrs='lg'
+      bg={tile.mark ? 'gray.0' : 'white'}
+      style={{
+        width: isMobile ? '25vw' : '5.5rem',
+        cursor: tile.mark || winner ? 'default' : 'pointer',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      opacity={
+        isWinningTile !== undefined ? (isWinningTile ? 1 : 0.25) : undefined
+      }
       onClick={winner ? undefined : handleClick}
     >
-      {tile.mark === 'x' ? (
-        <XMark size='3rem' />
-      ) : tile.mark === 'o' ? (
-        <CircleMark size='3rem' />
-      ) : (
-        !winner && (
-          <div className={styles['hover-mark']}>
-            {turn === 'x' ? <XMark size='3rem' /> : <CircleMark size='3rem' />}
-          </div>
-        )
+      {(['x', 'o'].includes(tile.mark ?? '') || !winner) && (
+        <TileMark
+          size='3rem'
+          icon={(tile.mark ?? turn) === 'x' ? IconX : IconCircle}
+          display={
+            !tile.mark && !winner
+              ? hovered && !isMobile
+                ? 'flex'
+                : 'none'
+              : undefined
+          }
+          opacity={!tile.mark && !winner ? 0.5 : undefined}
+        />
       )}
-    </div>
+    </Box>
   );
 };
