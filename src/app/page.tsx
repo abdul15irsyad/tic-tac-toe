@@ -1,73 +1,144 @@
 'use client';
 
-import { useEffect } from 'react';
-import { Tiles } from '@/app/(components)/tiles.component';
-import { useTileStore } from './(store)/use-tiles.store';
-import { IconCircle, IconRefresh, IconX } from '@tabler/icons-react';
-import { Box, Button, Container, Group, Title } from '@mantine/core';
-import { TileMark } from './(components)/tile-mark';
+import {
+  Avatar,
+  AvatarGroup,
+  Badge,
+  Box,
+  Button,
+  Container,
+  Grid,
+  Group,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+} from '@mantine/core';
+import {
+  IconBrain,
+  IconPlayerPlayFilled,
+  IconUsers,
+  IconWorld,
+} from '@tabler/icons-react';
+import Link from 'next/link';
 
 export default () => {
-  const { tiles, winner, notification, turn, clearTiles, setNotification } =
-    useTileStore();
-
-  useEffect(() => {
-    setNotification(
-      winner || tiles?.filter(({ mark }) => !mark)?.length !== 0 ? (
-        <>
-          <TileMark
-            size='1.25rem'
-            icon={(winner ?? turn) === 'x' ? IconX : IconCircle}
-          />
-          {winner ? 'win the game 🎉' : 'turn to play'}
-        </>
-      ) : (
-        'game draw'
-      ),
-    );
-  }, [tiles, turn, winner, setNotification]);
   return (
-    <Container
-      size='xs'
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1.5rem',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: '0 auto',
-        padding: '2rem 1rem 0',
-        height: '100dvh',
-      }}
-    >
-      <Title fw={800}>Tic Tac Toe</Title>
-      <Box ta='center'>
-        <Tiles />
-        {notification && (
-          <Group
-            display='inline-flex'
-            p='lg'
-            gap='0.25rem'
-            style={{ userSelect: 'none' }}
+    <Container size='xl' w={'100%'}>
+      <Grid gutter={{ base: 'md' }}>
+        <Grid.Col span={7} display='flex'>
+          <Stack
+            justify='space-between'
+            bdrs={'xl'}
+            bg={'blue.0'}
+            p={'xl'}
+            w={'100%'}
           >
-            {notification}
+            <Box mb={'3rem'}>
+              <ThemeIcon size={'4rem'} radius={'lg'} mb={'lg'} color={'blue.6'}>
+                <IconUsers />
+              </ThemeIcon>
+              <Title fz={'h1'} fw={800}>
+                Two Player
+              </Title>
+              <Text>
+                Classic couch play. Share the device with your friend and settle
+                the score
+              </Text>
+            </Box>
+            <Group justify='space-between'>
+              <Badge variant='light'>Same Device</Badge>
+              <Button
+                component={Link}
+                href='/two-players'
+                leftSection={<IconPlayerPlayFilled size={'1rem'} />}
+                radius={'lg'}
+              >
+                Play Now
+              </Button>
+            </Group>
+          </Stack>
+        </Grid.Col>
+        <Grid.Col span={5} display='flex'>
+          <Stack
+            justify='space-between'
+            bdrs={'xl'}
+            bg={'teal.0'}
+            p={'xl'}
+            w={'100%'}
+          >
+            <Box mb={'3rem'}>
+              <ThemeIcon size={'4rem'} radius={'lg'} mb={'lg'} color={'teal.6'}>
+                <IconBrain />
+              </ThemeIcon>
+              <Title fz={'h1'} fw={800}>
+                VS Computer
+              </Title>
+              <Text>
+                Challenge our advanced AI. From &quot;Beginner&quot; to
+                &quot;Unbeatable&quot; modes.
+              </Text>
+            </Box>
+            <Group justify='space-between'>
+              <Badge variant='light' color='teal.6'>
+                Solo Mode
+              </Badge>
+              <Button
+                component={Link}
+                href='/vs-computer'
+                leftSection={<IconPlayerPlayFilled size={'1rem'} />}
+                radius={'lg'}
+                color='teal.6'
+              >
+                Play Now
+              </Button>
+            </Group>
+          </Stack>
+        </Grid.Col>
+        <Grid.Col span={12} display='flex'>
+          <Group
+            justify='space-between'
+            align='center'
+            bdrs={'xl'}
+            bg={'dark'}
+            p={'xl'}
+            w={'100%'}
+          >
+            <Box maw={'400px'}>
+              <Badge color='blue.6' mb={'lg'}>
+                Live Now
+              </Badge>
+              <Title fz={'h1'} fw={800} c={'white'}>
+                Multiplayer Lobby
+              </Title>
+              <Text c={'gray.6'}>
+                Climb the global leaderboard and play against players from
+                around the world
+              </Text>
+            </Box>
+            <Stack align='center'>
+              <AvatarGroup>
+                <Avatar src='image.png' />
+                <Avatar src='image.png' />
+                <Avatar src='image.png' />
+                <Avatar>+5</Avatar>
+              </AvatarGroup>
+              <Button
+                component={Link}
+                href='/lobby'
+                leftSection={<IconWorld size={'1rem'} />}
+                radius={'xl'}
+                color='blue.6'
+                px={'xl'}
+                py={'md'}
+                h={'auto'}
+              >
+                Join Arena
+              </Button>
+            </Stack>
           </Group>
-        )}
-      </Box>
-      <Button
-        leftSection={<IconRefresh size='1rem' />}
-        onClick={() => clearTiles()}
-        disabled={tiles?.filter(({ mark }) => mark)?.length === 0}
-        radius='md'
-        color='blue.7'
-        bdrs='lg'
-        fz='md'
-        px='xl'
-        py='md'
-        h='auto'
-      >
-        Restart Board
-      </Button>
+        </Grid.Col>
+      </Grid>
     </Container>
   );
 };

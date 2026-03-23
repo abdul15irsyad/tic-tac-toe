@@ -1,7 +1,7 @@
 'use client';
 
 import { useTileStore } from '@/app/(store)/use-tiles.store';
-import { Tile } from './tile.component';
+import { Tile } from './tile';
 import { SimpleGrid } from '@mantine/core';
 
 export const Tiles = () => {

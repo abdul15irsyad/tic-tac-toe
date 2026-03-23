@@ -1,5 +1,5 @@
 import { IconX } from '@tabler/icons-react';
-import { IconWrapper, IconWrapperProps } from './icon-wrapper.component';
+import { IconWrapper, IconWrapperProps } from './icon-wrapper';
 import { useMantineTheme } from '@mantine/core';
 
 export const TileMark = (props: IconWrapperProps) => {

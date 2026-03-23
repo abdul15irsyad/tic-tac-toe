@@ -62,7 +62,7 @@ export const Tile = ({ tile }: { tile: ITile }) => {
       bdrs='lg'
       bg={tile.mark ? 'gray.0' : 'white'}
       style={{
-        width: isMobile ? '25vw' : '5.5rem',
+        width: '100%',
         cursor: tile.mark || winner ? 'default' : 'pointer',
         justifyContent: 'center',
         alignItems: 'center',
